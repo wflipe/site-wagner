@@ -4,1379 +4,392 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wagner Filipe | IA Especializada para ClÃ­nicas</title>
+    <title>Wagner Filipe | IA Especializada para Clínicas</title>
     <meta name="description"
-        content="Implemente a IA especializada na sua clÃ­nica: O sistema que responde em segundos, qualifica convÃªnios e agenda 24h. Fim da fila de espera." />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet" />
+        content="Implemente a IA especializada na sua clínica: O sistema que responde em segundos, qualifica convínios e agenda 24h. Fim da fila de espera." />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" />
+
+    <!-- Tailwind via Script just for rapid utility mapping, tailored to premium layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { primary: "#0097A7", secondary: "#00796B", surface: "#FAFAFA", accent: "#006064" },
-                    fontFamily: { headline: ["'Space Grotesk'"], body: ["'Inter'"], mono: ["'JetBrains Mono'"] }
+                    colors: {
+                        primary: "#00677d",
+                        primaryHover: "#005466",
+                        accent: "#00a1c1",
+                        surface: "#ffffff",
+                        surfaceAlt: "#f1f5f9",
+                        textMain: "#0f172a",
+                        textMuted: "#64748b"
+                    },
+                    fontFamily: {
+                        headline: ["'Space Grotesk'", "sans-serif"],
+                        body: ["'Manrope'", "sans-serif"],
+                        mono: ["'JetBrains Mono'", "monospace"]
+                    }
                 }
             }
         };
     </script>
-    <style>
-        :root {
-            --c: #0097A7;
-            --t: #00796B;
-            --bg: #FAFAFA;
-            --fg: #0D1F1F;
-            --border: rgba(0,0,0,.08);
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--fg);
-            overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
-            cursor: auto;
-        }
-
-        /* splash removido */
-
-        /* â”€â”€ FUNDO â”€â”€ */
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            opacity: .04;
-            background-image: linear-gradient(rgba(0,151,167,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0,151,167,.6) 1px, transparent 1px);
-            background-size: 80px 80px;
-        }
-
-        /* â”€â”€ NAV â”€â”€ */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 200;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.6rem 6vw;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(20px);
-            background: rgba(250,250,250,.88);
-        }
-
-        .nav-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: .85rem;
-            letter-spacing: .3em;
-            text-transform: uppercase;
-            color: var(--fg);
-        }
-
-        .nav-status {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .65rem;
-            color: rgba(0,151,167,.7);
-            letter-spacing: .15em;
-        }
-
-        .pulse {
-            width: 5px;
-            height: 5px;
-            background: var(--t);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .15; }
-        }
-
-        .nav-cta {
-            border: 1px solid rgba(0,151,167,.4);
-            color: var(--c);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: .6rem;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-            padding: .6rem 1.4rem;
-            text-decoration: none;
-            transition: background .25s, color .25s;
-        }
-
-        .nav-cta:hover {
-            background: var(--c);
-            color: #fff;
-        }
-
-        /* â”€â”€ HERO â”€â”€ */
-        .hero {
-            position: relative;
-            min-height: 100svh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding-top: 5rem;
-        }
-
-        .hero-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            flex: 1;
-            position: relative;
-            z-index: 10;
-            align-items: center;
-        }
-
-        .hero-left {
-            padding: 4rem 2rem 4rem 6vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-right {
-            border-left: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem 6vw 4rem 2rem;
-            position: relative;
-            height: 100%;
-        }
-
-        #machine-stage {
-            width: 100%;
-            max-width: 460px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        #machine-stage svg {
-            width: 100%;
-            height: auto;
-            display: block;
-            overflow: visible;
-        }
-
-        .hl-word {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: clamp(3rem, 5.5vw, 6.5rem);
-            line-height: .9;
-            letter-spacing: -.03em;
-            text-transform: uppercase;
-            display: block;
-            overflow: hidden;
-        }
-
-        .hl-inner {
-            display: block;
-            transform: translateY(110%);
-        }
-
-        .hl-cyan {
-            color: var(--c);
-            font-style: italic;
-        }
-
-        .hl-ghost {
-            -webkit-text-stroke: 1px rgba(13,31,31,.15);
-            color: transparent;
-        }
-
-        .hero-bottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-top: 1px solid var(--border);
-            position: relative;
-            z-index: 10;
-        }
-
-        .hero-bottom-left {
-            padding: 2rem 6vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-bottom-right {
-            padding: 2rem 6vw 2rem 4vw;
-            border-left: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .6rem;
-            letter-spacing: .2em;
-            color: rgba(0,151,167,.7);
-            text-transform: uppercase;
-        }
-
-        /* CTA */
-        .cta-main {
-            display: inline-flex;
-            align-items: center;
-            gap: .75rem;
-            background: var(--c);
-            color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: .7rem;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            transition: background .25s, gap .25s;
-        }
-
-        .cta-main:hover {
-            background: var(--fg);
-            gap: 1.25rem;
-        }
-
-        .cta-main svg {
-            flex-shrink: 0;
-        }
-
-        /* SVG Machine Colors */
-        .bp {
-            stroke: rgba(0, 229, 255, .1);
-            stroke-width: .5;
-            fill: none;
-        }
-
-        .bpb {
-            stroke: rgba(0, 229, 255, .35);
-            stroke-width: .8;
-            fill: none;
-        }
-
-        .bpt {
-            stroke: rgba(29, 233, 182, .3);
-            stroke-width: .8;
-            fill: none;
-        }
-
-        /* â”€â”€ SECTIONS â”€â”€ */
-        .section {
-            padding: clamp(4rem, 8vw, 8rem) 6vw;
-            overflow: hidden;
-        }
-
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .6rem;
-            letter-spacing: .25em;
-            color: rgba(0,151,167,.6);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: clamp(2.5rem, 5vw, 5rem);
-            line-height: .9;
-            letter-spacing: -.03em;
-            text-transform: uppercase;
-            color: var(--fg);
-        }
-
-        .text-c {
-            color: var(--c);
-            font-style: italic;
-        }
-
-        .text-t {
-            color: var(--t);
-        }
-
-        /* CartÃµes genÃ©ricos */
-        .glass {
-            background: #fff;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-        }
-
-        .prob-card {
-            border-left: 2px solid rgba(0,151,167,.25);
-            padding: 1.5rem 2rem;
-            margin-bottom: 1px;
-            background: #fff;
-            transition: border-color .3s, background .3s;
-        }
-
-        .prob-card:hover {
-            border-color: var(--c);
-            background: rgba(0,151,167,.04);
-        }
-
-        /* â”€â”€ PERFIL (O ARQUITETO) â”€â”€ */
-        .profile-container {
-            position: relative;
-            border-radius: 1rem;
-            overflow: hidden;
-            background: linear-gradient(to bottom, #e0f4f7, var(--bg));
-            aspect-ratio: 4/5;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            border: 1px solid rgba(0,151,167,.2);
-        }
-
-        .profile-img-blend {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            mix-blend-mode: normal;
-            filter: contrast(1.05) brightness(1.05);
-            opacity: 0.95;
-            transition: all 0.5s ease;
-        }
-
-        .profile-container:hover .profile-img-blend {
-            filter: contrast(1.1) brightness(1.08);
-            transform: scale(1.03);
-            opacity: 1;
-        }
-
-        .profile-gradient {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg) 0%, transparent 55%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* Depoimentos */
-        .test-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1px;
-            background: var(--border);
-        }
-
-        .test-card {
-            background: #fff;
-            padding: 3rem 2.5rem;
-            display: flex;
-            flex-direction: column;
-            transition: background .3s;
-            border-top: 2px solid transparent;
-        }
-
-        .test-card:hover {
-            background: rgba(0,151,167,.03);
-            border-top-color: var(--c);
-        }
-
-        /* Stats */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .stat-item {
-            padding: 4rem 3rem;
-            border-right: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: clamp(3rem, 6vw, 6rem);
-            line-height: .9;
-            letter-spacing: -.04em;
-            color: var(--fg);
-        }
-
-        /* Modulos grid */
-        .mod-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-        }
-
-        .mod-card {
-            background: #fff;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            transition: background .3s;
-        }
-
-        .mod-card:hover {
-            background: rgba(0,151,167,.03);
-        }
-
-        .mod-card.featured {
-            background: rgba(0,151,167,.06);
-            border-top: 2px solid var(--c);
-        }
-
-        .mod-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.75rem;
-            margin-top: auto;
-            padding-top: 2rem;
-        }
-
-        /* Form */
-        .form-field {
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
-            padding-bottom: .5rem;
-            margin-bottom: 2rem;
-            transition: border-color .3s;
-        }
-
-        .form-field:focus-within {
-            border-color: rgba(0, 229, 255, .6);
-        }
-
-        .form-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .55rem;
-            letter-spacing: .2em;
-            color: rgba(0, 229, 255, .5);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: .5rem;
-        }
-
-        input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-size: 1.25rem;
-            color: #fff;
-            padding: .5rem 0;
-            cursor: none;
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, .08);
-        }
-
-        /* Responsividade Mobile */
-        @media (max-width: 768px) {
-            body {
-                cursor: auto;
-            }
-
-            #cd,
-            #cr {
-                display: none;
-            }
-
-            input,
-            .cta-main {
-                cursor: auto;
-            }
-
-            .hero {
-                padding-top: 6rem;
-            }
-
-            .hero-split {
-                grid-template-columns: 1fr;
-                align-items: start;
-            }
-
-            .hero-left {
-                padding: 0 1.5rem 2rem 1.5rem;
-            }
-
-            .hero-right {
-                border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, .06);
-                padding: 2rem 1.5rem;
-                min-height: 350px;
-            }
-
-            #machine-stage {
-                position: relative;
-                height: 100%;
-            }
-
-            #machine-stage svg {
-                width: 100%;
-                height: 100%;
-            }
-
-            .hl-word {
-                font-size: clamp(3.2rem, 12vw, 4rem);
-            }
-
-            .hero-bottom {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-bottom-left,
-            .hero-bottom-right {
-                padding: 1.5rem;
-                border-left: none;
-            }
-
-            .hero-bottom-right {
-                border-top: 1px solid var(--border);
-            }
-
-            .stat-grid,
-            .mod-grid,
-            .test-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-item {
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-                padding: 3rem 1.5rem;
-            }
-
-            .section {
-                padding: 4rem 1.5rem;
-            }
-
-            .section>div {
-                grid-template-columns: 1fr !important;
-                gap: 3rem !important;
-            }
-
-            nav {
-                padding: 1rem 1.5rem;
-            }
-        }
-    </style>
+    <!-- Custom Extracted CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+    <!-- Fundo Minimalista Premium -->
     <div class="bg-grid"></div>
 
-    <main id="page">
+    <!-- Navegação Sem Atrito -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass px-6 py-4 flex justify-between items-center">
+        <div class="font-headline font-bold text-xl tracking-widest uppercase">
+            IA<span class="text-accent">.</span>
+        </div>
+        <div class="hidden md:flex items-center gap-2 font-mono text-xs text-primary font-semibold tracking-wider">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            BY WAGNER SÍ LIMA // ATENDIMENTO 24H
+        </div>
+        <a href="#contato" class="btn-premium py-3 px-6 text-xs">Agendar Mapeamento</a>
+    </nav>
 
-        <nav>
-            <div class="nav-logo">IA<span style="color:var(--c)">.</span></div>
-            <div class="nav-status">
-                <div class="pulse"></div>
-                <span class="hidden md:inline">by Wagner SÃ¡ Lima // ATENDIMENTO 24H</span>
-            </div>
-            <a href="#contato" class="nav-cta">Agendar Mapeamento</a>
-        </nav>
-
-        <section class="hero">
-            <div
-                style="position:absolute;top:-10%;right:-5%;width:55vw;height:55vw;background:radial-gradient(ellipse,rgba(0,151,167,.06),transparent 65%);pointer-events:none;z-index:1;">
-            </div>
-
-            <div class="hero-split">
-                <div class="hero-left">
-                    <span class="tag mb-4 md:mb-6 opacity-0 hero-tag">[ IA ESPECIALIZADA // SECRETÃRIA VIRTUAL ]</span>
-                    <span class="hl-word hl-ghost"><span class="hl-inner">Sua recepÃ§Ã£o</span></span>
-                    <span class="hl-word hl-ghost"><span class="hl-inner">perde pacientes</span></span>
-                    <span class="hl-word hl-cyan"><span class="hl-inner">no WhatsApp.</span></span>
-                    <span class="hl-word"><span class="hl-inner">IA resolve.</span></span>
-                </div>
-
-                <div class="hero-right">
-                    <div id="machine-stage">
-                        <svg id="msv" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style="opacity:0">
-                            <defs>
-                                <filter id="gc">
-                                    <feGaussianBlur stdDeviation="5" result="b" />
-                                    <feMerge>
-                                        <feMergeNode in="b" />
-                                        <feMergeNode in="SourceGraphic" />
-                                    </feMerge>
-                                </filter>
-                                <filter id="gs">
-                                    <feGaussianBlur stdDeviation="2.5" result="b" />
-                                    <feMerge>
-                                        <feMergeNode in="b" />
-                                        <feMergeNode in="SourceGraphic" />
-                                    </feMerge>
-                                </filter>
-                                <radialGradient id="cg" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="#00E5FF" stop-opacity=".9" />
-                                    <stop offset="100%" stop-color="#00E5FF" stop-opacity="0" />
-                                </radialGradient>
-                            </defs>
-                            <g id="ld">
-                                <circle cx="250" cy="250" r="230" class="bp" />
-                                <circle cx="250" cy="250" r="205" class="bp" opacity=".5" />
-                                <line x1="20" y1="250" x2="480" y2="250" class="bp" />
-                                <line x1="250" y1="20" x2="250" y2="480" class="bp" />
-                                <line x1="88" y1="88" x2="412" y2="412" class="bp" />
-                                <line x1="412" y1="88" x2="88" y2="412" class="bp" />
-                                <line x1="250" y1="90" x2="250" y2="-30" class="bpb" />
-                                <line x1="410" y1="250" x2="540" y2="250" class="bpb" />
-                                <line x1="90" y1="250" x2="-40" y2="250" class="bpb" />
-                                <line x1="250" y1="410" x2="250" y2="540" class="bpt" />
-                            </g>
-                            <g id="lm">
-                                <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(0,229,255,.15)"
-                                    stroke-width="1.5" />
-                                <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(0,229,255,.3)"
-                                    stroke-width="1" stroke-dasharray="2 16" />
-                                <circle cx="250" cy="250" r="110" fill="rgba(0,229,255,.01)"
-                                    stroke="rgba(0,229,255,.18)" stroke-width="1" />
-                                <g stroke="rgba(0,229,255,.08)" stroke-width=".8" fill="none">
-                                    <line x1="250" y1="140" x2="250" y2="360" />
-                                    <line x1="140" y1="250" x2="360" y2="250" />
-                                    <line x1="172" y1="172" x2="328" y2="328" />
-                                    <line x1="328" y1="172" x2="172" y2="328" />
-                                </g>
-                                <g id="ntop">
-                                    <circle cx="250" cy="132" r="20" fill="rgba(5,12,12,.95)"
-                                        stroke="rgba(0,229,255,.55)" stroke-width="1.2" filter="url(#gs)" />
-                                    <circle cx="250" cy="132" r="14" fill="none" stroke="rgba(0,229,255,.12)"
-                                        stroke-width=".8" stroke-dasharray="3 4" />
-                                    <circle cx="250" cy="132" r="4" fill="#00E5FF" filter="url(#gc)" />
-                                </g>
-                                <g id="nright">
-                                    <circle cx="368" cy="250" r="20" fill="rgba(5,12,12,.95)"
-                                        stroke="rgba(29,233,182,.55)" stroke-width="1.2" filter="url(#gs)" />
-                                    <circle cx="368" cy="250" r="14" fill="none" stroke="rgba(29,233,182,.12)"
-                                        stroke-width=".8" stroke-dasharray="3 4" />
-                                    <circle cx="368" cy="250" r="4" fill="#1DE9B6" filter="url(#gc)" />
-                                </g>
-                                <g id="nleft">
-                                    <circle cx="132" cy="250" r="20" fill="rgba(5,12,12,.95)"
-                                        stroke="rgba(0,229,255,.55)" stroke-width="1.2" filter="url(#gs)" />
-                                    <circle cx="132" cy="250" r="14" fill="none" stroke="rgba(0,229,255,.12)"
-                                        stroke-width=".8" stroke-dasharray="3 4" />
-                                    <circle cx="132" cy="250" r="4" fill="#00E5FF" filter="url(#gc)" />
-                                </g>
-                                <g id="nbot">
-                                    <circle cx="250" cy="368" r="24" fill="rgba(5,12,12,.95)"
-                                        stroke="rgba(29,233,182,.7)" stroke-width="1.5" filter="url(#gs)" />
-                                    <circle cx="250" cy="368" r="17" fill="none" stroke="rgba(29,233,182,.18)"
-                                        stroke-width="1" stroke-dasharray="2 4" />
-                                    <circle cx="250" cy="368" r="7" fill="#1DE9B6" filter="url(#gc)" />
-                                </g>
-                            </g>
-                            <g id="lf">
-                                <g id="rcw">
-                                    <circle cx="250" cy="250" r="55" fill="none" stroke="rgba(0,229,255,.3)"
-                                        stroke-width="1" stroke-dasharray="8 5" />
-                                </g>
-                                <g id="rccw">
-                                    <circle cx="250" cy="250" r="40" fill="none" stroke="rgba(29,233,182,.4)"
-                                        stroke-width="1.2" stroke-dasharray="5 6" />
-                                </g>
-                                <circle cx="250" cy="250" r="26" fill="rgba(0,229,255,.05)" stroke="rgba(0,229,255,.65)"
-                                    stroke-width="1.2" filter="url(#gs)" />
-                                <circle cx="250" cy="250" r="16" fill="rgba(0,229,255,.08)" stroke="rgba(0,229,255,.35)"
-                                    stroke-width="1" />
-                                <circle id="cdot" cx="250" cy="250" r="7" fill="url(#cg)" filter="url(#gc)" />
-                                <g stroke="rgba(0,229,255,.55)" stroke-width="1" fill="none">
-                                    <line x1="250" y1="228" x2="250" y2="212" />
-                                    <line x1="250" y1="272" x2="250" y2="288" />
-                                    <line x1="228" y1="250" x2="212" y2="250" />
-                                    <line x1="272" y1="250" x2="288" y2="250" />
-                                </g>
-                                <circle id="p1" r="3.5" fill="#00E5FF" filter="url(#gs)" opacity="0" />
-                                <circle id="p2" r="3.5" fill="#1DE9B6" filter="url(#gs)" opacity="0" />
-                                <circle id="p3" r="3.5" fill="#00E5FF" filter="url(#gs)" opacity="0" />
-                                <circle id="p4" r="4.5" fill="#1DE9B6" filter="url(#gc)" opacity="0" />
-                                <circle id="p5" r="2.5" fill="rgba(0,229,255,.8)" filter="url(#gs)" opacity="0" />
-                                <circle id="p6" r="2.5" fill="rgba(29,233,182,.8)" filter="url(#gs)" opacity="0" />
-                            </g>
-                            <g id="ll" font-family="'JetBrains Mono',monospace" opacity="0">
-                                <text x="250" y="94" text-anchor="middle" font-size="8" fill="rgba(0,229,255,.85)"
-                                    letter-spacing="2.5">TRÃFEGO</text>
-                                <text x="250" y="82" text-anchor="middle" font-size="6" fill="rgba(0,229,255,.35)"
-                                    letter-spacing="2">01 // AQUISIÃ‡ÃƒO</text>
-                                <text x="430" y="246" text-anchor="start" font-size="8" fill="rgba(29,233,182,.85)"
-                                    letter-spacing="2">IA ENGINE</text>
-                                <text x="430" y="259" text-anchor="start" font-size="6" fill="rgba(29,233,182,.35)"
-                                    letter-spacing="1.5">02 // ATENDIMENTO</text>
-                                <text x="70" y="246" text-anchor="end" font-size="8" fill="rgba(0,229,255,.85)"
-                                    letter-spacing="2">CRM</text>
-                                <text x="70" y="259" text-anchor="end" font-size="6" fill="rgba(0,229,255,.35)"
-                                    letter-spacing="1.5">KOMMO.IO</text>
-                                <text x="250" y="420" text-anchor="middle" font-size="9" fill="rgba(29,233,182,.95)"
-                                    letter-spacing="2.5">LUCRO PREVISÃVEL</text>
-                                <text x="250" y="434" text-anchor="middle" font-size="6" fill="rgba(29,233,182,.35)"
-                                    letter-spacing="2">03 // ESCALA</text>
-                                <text x="250" y="232" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.25)"
-                                    letter-spacing="2.5">SALES ENGINE</text>
-                                <text x="250" y="272" text-anchor="middle" font-size="5.5" fill="rgba(0,229,255,.25)"
-                                    letter-spacing="1.5">STATUS: ACTIVE</text>
-                            </g>
-                        </svg>
-                    </div>
-                    <div style="position:relative;z-index:10;margin-top:auto;">
-                        <span class="tag" style="opacity:0" id="htag2">[ 02 // ATENDIMENTO ATIVO 24H ]</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-bottom">
-                <div class="hero-bottom-left" style="opacity:0" id="hfade">
-                    <p style="color:rgba(13,31,31,.6);" class="text-sm leading-relaxed max-w-md">
-                        Implemento um ecossistema de atendimento por IA que <strong style="color:var(--fg);">responde em
-                            segundos, qualifica convênios e agenda consultas 24h.</strong> Fim da fila de espera e do
-                        desperdício de leads.
-                    </p>
-                </div>
-                <div class="hero-bottom-right" style="opacity:0" id="hcta">
-                    <a href="#infraestrutura" class="cta-main">
-                        Ver Planos e Agendar Mapeamento
-                        <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" style="border-top:1px solid var(--border)">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;" class="gsap-reveal">
-                <div>
-                    <span class="section-label">[ O GARGALO ]</span>
-                    <h2 class="section-title">
-                        Lentidão no<br>
-                        <span class="text-t">atendimento</span><br>
-                        <span style="color:rgba(13,31,31,.25)">custa caro.</span>
-                    </h2>
-                    <p style="color:rgba(13,31,31,.6);" class="text-base leading-relaxed mt-8">
-                        O problema não é falta de pacientes. É o gargalo no atendimento. Se o paciente clica no seu
-                        anúncio e a recepção demora a responder, é <strong style="color:var(--fg);">dinheiro de tráfego
-                            jogado no lixo</strong>. O problema é falha de processo.
-                    </p>
-                </div>
-                <div style="margin-top:2rem;">
-                    <div class="prob-card">
-                        <div class="tag mb-2">01 // ATENDIMENTO FORA DO HORÁRIO</div>
-                        <p style="color:rgba(13,31,31,.6);" class="text-sm leading-relaxed"><strong style="color:var(--fg);">35%</strong> das
-                            mensagens chegam fora do horário comercial. Sua clínica fecha, mas a dor do paciente não
-                            espera.</p>
-                    </div>
-                    <div class="prob-card">
-                        <div class="tag mb-2">02 // VELOCIDADE DE RESPOSTA</div>
-                        <p style="color:rgba(13,31,31,.6);" class="text-sm leading-relaxed"><strong style="color:var(--fg);">68%</strong> das
-                            pessoas que não recebem resposta em até 5 minutos fecham com a concorrência.</p>
-                    </div>
-                    <div class="prob-card" style="border-color:rgba(0,121,107,.4);">
-                        <div class="tag mb-2" style="color:rgba(0,121,107,.8);">03 // VERBA DE TRÁFEGO PERDIDA</div>
-                        <p style="color:rgba(13,31,31,.6);" class="text-sm leading-relaxed">Sem um sistema conectado, cada lead que não é
-                            atendido a tempo é dinheiro de anúncio que simplesmente evaporou.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="stats-trigger"
-            style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;">
-            <div
-                style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,151,167,.03),rgba(0,121,107,.03));pointer-events:none;">
-            </div>
-            <div
-                style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,151,167,.3),transparent);">
-            </div>
-            <div class="stat-grid relative z-10">
-                <div class="stat-item gsap-reveal">
-                    <div class="stat-num"><span class="counter" data-val="174">0</span>K+</div>
-                    <div class="tag mt-4">LEADS GERENCIADOS</div>
-                </div>
-                <div class="stat-item gsap-reveal">
-                    <div class="stat-num"><span class="counter" data-val="24">0</span>K+</div>
-                    <div class="tag mt-4">VENDAS REALIZADAS</div>
-                </div>
-                <div class="stat-item gsap-reveal">
-                    <div class="stat-num">R$<span class="counter" data-val="1.6" data-dec="true">0</span>M</div>
-                    <div class="tag mt-4">EM MÍDIA OTIMIZADA</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section relative overflow-hidden" id="sobre">
-            <div
-                class="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[100px] rounded-full pointer-events-none">
-            </div>e">
-            <div
-                class="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none">
-            </div>
-
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:4rem;align-items:center;"
-                class="gsap-reveal">
-
-                <div class="profile-container shadow-2xl shadow-primary/10">
-                    <img src="photo_5035048774975731278_y.jpg" alt="Wagner SÃ¡ Lima" class="profile-img-blend">
-                    <div class="profile-gradient"></div>
-
-                    <div
-                        class="absolute top-6 left-6 tag border border-white/10 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded z-10">
-                        SYS_ADMIN</div>
-                    <div class="absolute bottom-6 right-6 z-10">
-                        <svg width="40" height="40" viewBox="0 0 40 40" class="opacity-50">
-                            <path
-                                d="M0 0h10v2H2v8H0V0zm30 0h10v10h-2V2h-8V0zM0 40h10v-2H2v-8H0v10zm30 0h10V30h-2v8h-8v2z"
-                                fill="#00E5FF" />
-                        </svg>
-                    </div>
-                </div>
-
-                <div style="z-index: 10;">
-                    <span class="section-label">[ O ARQUITETO DA IA ]</span>
-                    <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 4.5rem); margin-bottom: 2rem;">Wagner
-                        <span class="text-c">SÃ¡ Lima.</span>
-                    </h2>
-
-                    <div class="space-y-6 text-white/60 text-base leading-relaxed">
-                        <p>EstratÃ©gista Comercial e especialista em <strong style="color:var(--fg);">AutomaÃ§Ã£o e InteligÃªncia
-                                Artificial</strong>. Construo sistemas de atendimento que trabalham enquanto vocÃª foca
-                            no que realmente precisa do seu tempo.
-                        </p>
-                        <p>HÃ¡ 11 anos atuo dentro do <strong style="color:var(--fg);">Grupo Nobre</strong> â€” um dos maiores
-                            conglomerados da Bahia, com marcas como ColÃ©gio Nobre, UNIFAN, UNEF, MapleBear, Hospital
-                            INCARDIO, UniÃ£o MÃ©dica e Bahia de Feira â€” como um dos estrategistas pela operaÃ§Ã£o comercial
-                            e tecnolÃ³gica de uma base com mais de <strong>174.966 contatos (leads)</strong>,
-                            <strong>24.261 matrÃ­culas</strong> e <strong>R$ 1.619.198,56</strong> em verba de mÃ­dia,
-                            conquistando <strong>249 MilhÃµes de impressÃµes</strong> e <strong>8 MilhÃµes de
-                                alcance</strong> junto a uma equipe incrÃ­vel.
-                        </p>
-                        <p>Os meus 11 anos de experiÃªncia se dividem em: <strong>5 anos no marketing</strong>, <strong>2
-                                anos no setor EAD</strong> desenvolvendo o produto, e <strong>3 anos no
-                                comercial</strong> como especialista em CRM (utilizando o CRM Rubeus na UNEF e UNIFAN hÃ¡
-                            3 anos).
-                        </p>
-                        <p>Essa experiÃªncia em escala real dentro de uma organizaÃ§Ã£o de alto padrÃ£o Ã© o que diferencia a
-                            <strong>IA especializada</strong> de qualquer soluÃ§Ã£o genÃ©rica de chatbot. Eu sei o que
-                            funciona.
-                        </p>
-                    </div>
-
-                    <!-- Credencial Grupo Nobre -->
-                    <div class="gsap-reveal"
-                        style="margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid rgba(0,229,255,.15);background:rgba(0,229,255,.04);display:flex;align-items:center;gap:1.5rem;">
-                        <div style="flex-shrink:0;">
-                            <div class="tag" style="color:rgba(0,229,255,.6);margin-bottom:.25rem;">[ CREDENCIAL ]</div>
-                            <div
-                                style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;">
-                                Grupo Nobre</div>
-                            <div class="tag" style="margin-top:.2rem;">EducaÃ§Ã£o Â· SaÃºde Â· Esporte Â· Entretenimento</div>
-                        </div>
-                        <div style="width:1px;height:3rem;background:rgba(255,255,255,.08);flex-shrink:0;"></div>
-                        <div class="tag" style="color:rgba(255,255,255,.5);line-height:1.6;">11 anos de atuaÃ§Ã£o<br>Feira
-                            de Santana â€“ BA</div>
-                    </div>
-
-                    <div class="mt-8 flex gap-8">
-                        <div class="flex flex-col border-l-2 border-primary/30 pl-4">
-                            <span class="text-white font-headline font-bold text-2xl">11 Anos</span>
-                            <span class="tag" style="margin-top:0.25rem;">GRUPO NOBRE</span>
-                        </div>
-                        <div class="flex flex-col border-l-2 border-primary/30 pl-4">
-                            <span class="text-white font-headline font-bold text-2xl">174K+</span>
-                            <span class="tag" style="margin-top:0.25rem;">CONTATOS GERENCIADOS</span>
-                        </div>
-                        <div class="flex flex-col border-l-2 border-primary/30 pl-4">
-                            <span class="text-white font-headline font-bold text-2xl">R$1,6M</span>
-                            <span class="tag" style="margin-top:0.25rem;">MÃDIA OTIMIZADA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CO-BRANDING GRUPO NOBRE -->
-        <section class="section"
-            style="border-top:1px solid var(--border);padding-top:3rem;padding-bottom:3rem;">
-            <div class="gsap-reveal" style="margin-bottom:2.5rem;">
-                <span class="section-label">[ OPERAÃ‡ÃƒO INTERNA ]</span>
-                <p class="text-white/30 text-sm mt-1">Durante 11 anos, Wagner estruturou a inteligÃªncia comercial dessas
-                    marcas.</p>
-            </div>
-            <style>
-                .brand-card {
-                    border: 1px solid rgba(255,255,255,.06);
-                    padding: 1.5rem 1rem;
-                    text-align: center;
-                    background: rgba(255,255,255,.02);
-                    transition: border-color .3s, background .3s;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: .75rem;
-                }
-                .brand-card:hover { border-color: rgba(0,229,255,.25); background: rgba(0,229,255,.03); }
-                .brand-card.health:hover { border-color: rgba(29,233,182,.25); background: rgba(29,233,182,.02); }
-                .brand-card img {
-                    width: 80px;
-                    height: 80px;
-                    object-fit: contain;
-                    filter: grayscale(1) brightness(1.6);
-                    transition: filter .4s;
-                }
-                .brand-card:hover img { filter: grayscale(0) brightness(1); }
-            </style>
-            <div class="gsap-reveal"
-                style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;">
-
-                <!-- ColÃ©gio Nobre -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-03.png?resize=200%2C200&ssl=1" alt="ColÃ©gio Nobre" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">ColÃ©gio Nobre</div>
-                        <div class="tag" style="margin-top:.2rem;">EducaÃ§Ã£o BÃ¡sica</div>
-                    </div>
-                </div>
-
-                <!-- UNIFAN -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/08/MARCA-UNIFAN_3459.png?resize=200%2C200&ssl=1" alt="UNIFAN" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">UNIFAN</div>
-                        <div class="tag" style="margin-top:.2rem;">Ensino Superior</div>
-                    </div>
-                </div>
-
-                <!-- UNEF -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-10.png?resize=200%2C200&ssl=1" alt="UNEF" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">UNEF</div>
-                        <div class="tag" style="margin-top:.2rem;">Ensino Superior</div>
-                    </div>
-                </div>
-
-                <!-- Maple Bear -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2022/01/maple-bear-canadian-feira-de-santana-830x830-1.png?resize=200%2C200&ssl=1" alt="Maple Bear" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Maple Bear</div>
-                        <div class="tag" style="margin-top:.2rem;">EducaÃ§Ã£o BilÃ­ngue</div>
-                    </div>
-                </div>
-
-                <!-- INCARDIO -->
-                <div class="brand-card health">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-07.png?resize=200%2C200&ssl=1" alt="INCARDIO" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#1DE9B6;letter-spacing:.06em;text-transform:uppercase;">INCARDIO</div>
-                        <div class="tag" style="margin-top:.2rem;">SaÃºde</div>
-                    </div>
-                </div>
-
-                <!-- UniÃ£o MÃ©dica -->
-                <div class="brand-card health">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-06.png?resize=200%2C200&ssl=1" alt="UniÃ£o MÃ©dica" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#1DE9B6;letter-spacing:.06em;text-transform:uppercase;">UniÃ£o MÃ©dica</div>
-                        <div class="tag" style="margin-top:.2rem;">Plano de SaÃºde</div>
-                    </div>
-                </div>
-
-                <!-- Bahia de Feira -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-05.png?resize=200%2C200&ssl=1" alt="Bahia de Feira" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Bahia de Feira</div>
-                        <div class="tag" style="margin-top:.2rem;">Clube de Futebol</div>
-                    </div>
-                </div>
-
-                <!-- Arena Cajueiro -->
-                <div class="brand-card">
-                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-09.png?resize=200%2C200&ssl=1" alt="Arena Cajueiro" loading="lazy">
-                    <div>
-                        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Arena Cajueiro</div>
-                        <div class="tag" style="margin-top:.2rem;">Eventos &amp; Esporte</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="section" style="padding-top:4rem;">
-            <div class="gsap-reveal" style="margin-bottom:4rem;">
-                <span class="section-label">[ LOG DE SISTEMA: RESULTADOS ]</span>
-                <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 4rem);">A Prova do <br><span
-                        class="text-t">Protocolo</span></h2>
-            </div>
-
-            <div class="test-grid gsap-reveal">
-                <div class="test-card">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="tag text-primary">ID_01 // NUTRÃ“LOGA</div>
-                        <span class="text-primary font-serif text-4xl leading-none">"</span>
-                    </div>
-                    <p class="text-white/70 italic leading-relaxed mb-8 flex-1">"Antes o meu WhatsApp sÃ³ recebia
-                        curiosos perguntando preÃ§o de convÃªnio. ApÃ³s a implantaÃ§Ã£o da IA Especializada, o sistema triou
-                        os planos,
-                        qualificou os pacientes e minha taxa de agendamentos particulares triplicou em 60 dias."</p>
-                    <div>
-                        <div class="font-headline font-bold text-lg text-white">Dra. Camila M.</div>
-                        <div class="tag mt-2" style="color:rgba(255,255,255,0.3)">ClÃ­nica de Performance</div>
-                    </div>
-                </div>
-
-                <div class="test-card">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="tag text-secondary">ID_02 // CLÃNICA MÃ‰DICA</div>
-                        <span class="text-secondary font-serif text-4xl leading-none">"</span>
-                    </div>
-                    <p class="text-white/70 italic leading-relaxed mb-8 flex-1">"A IA comeÃ§ou a responder no
-                        WhatsApp no mesmo segundo que o lead chegava. NÃ£o perdemos mais nenhum contato por demora no
-                        atendimento. A recepÃ§Ã£o ficou livre para o que realmente precisa de humano."</p>
-                    <div>
-                        <div class="font-headline font-bold text-lg text-white">Dr. Rafael V.</div>
-                        <div class="tag mt-2" style="color:rgba(255,255,255,0.3)">Longevidade & SaÃºde</div>
-                    </div>
-                </div>
-
-                <!-- Card especial: Prof. Jodilton Souza -->
-                <div class="test-card"
-                    style="border-color:rgba(0,229,255,.2);background:linear-gradient(135deg,rgba(0,229,255,.04) 0%,rgba(0,0,0,0) 60%);position:relative;overflow:hidden;">
-                    <div
-                        style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(0,229,255,.12) 0%,transparent 70%);pointer-events:none;">
-                    </div>
-                    <div class="flex justify-between items-start mb-6">
-                        <div>
-                            <div class="tag" style="color:rgba(0,229,255,.8);margin-bottom:.4rem;">[ LIDER DE REFERÃŠNCIA
-                                ]</div>
-                            <div class="tag" style="color:rgba(255,255,255,.3);">GRUPO NOBRE Â· FEIRA DE SANTANA â€“ BA
-                            </div>
-                        </div>
-                        <span class="font-serif text-4xl leading-none" style="color:rgba(0,229,255,.5);">"</span>
-                    </div>
-                    <p class="text-white/70 italic leading-relaxed mb-8 flex-1">"A excelÃªncia nÃ£o Ã© um destino, Ã© um
-                        hÃ¡bito diÃ¡rio. Ao longo desses 45 anos, a forÃ§a do Grupo Nobre veio de pessoas que acreditaram
-                        no poder transformador da educaÃ§Ã£o, da disciplina e da fÃ© no que estÃ£o fazendo. O Wagner carrega
-                        esse DNA dentro da nossa operaÃ§Ã£o."</p>
-                    <div style="display:flex;gap:1rem;align-items:center;">
-                        <div
-                            style="width:42px;height:42px;border-radius:50%;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;color:#00E5FF;">
-                            JS</div>
-                        <div>
-                            <div class="font-headline font-bold text-lg text-white">Prof. Jodilton Souza</div>
-                            <div class="tag mt-1" style="color:rgba(0,229,255,.5);">Presidente Â· Grupo Nobre</div>
-                            <div class="tag" style="color:rgba(255,255,255,.2);margin-top:.15rem;">Comendador Â·
-                                EmpresÃ¡rio Â· Palestrante</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="infraestrutura" class="section">
-            <div class="gsap-reveal" style="margin-bottom:2rem;">
-                <span class="section-label">[ SELECIONE SEU PLANO ]</span>
-                <h2 class="section-title">Quanto custa <br><span class="text-c">implementar?</span></h2>
-            </div>
-            <p class="text-white/40 text-base leading-relaxed mb-12 gsap-reveal" style="max-width:680px;">O projeto Ã©
-                dividido em duas etapas. Primeiro o <strong class="text-white/70">Setup de ImplementaÃ§Ã£o</strong> (taxa
-                Ãºnica de R$Â 1.200), que cobre mapeamento do fluxo, criaÃ§Ã£o dos prompts e treinamento da IA com as regras
-                da clÃ­nica. Em seguida, vocÃª escolhe a licenÃ§a mensal ideal.</p>
-            <div class="mod-grid gsap-reveal">
-                <div class="mod-card">
-                    <div class="tag mb-8">[ 01_ESSENTIAL ]</div>
-                    <h3
-                        style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;">
-                        Para Iniciar<br>a AutomaÃ§Ã£o</h3>
-                    <p class="text-white/40 text-sm leading-relaxed mb-8">Ideal para clÃ­nicas que querem comeÃ§ar a
-                        automatizar o atendimento bÃ¡sico.</p>
-                    <ul style="list-style:none;flex:1;" class="text-sm text-white/55">
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> 250 Conversas mensais</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> 2 ConexÃµes de WhatsApp</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> IA de atendimento / agendamento /
-                            qualificaÃ§Ã£o</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> CompreensÃ£o de Ã¡udios</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> Linguagem humanizada e treinamento
-                            contÃ­nuo</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> IntegraÃ§Ã£o oficial com a Meta</li>
-                    </ul>
-                    <div class="mod-price" style="border-top:1px solid rgba(255,255,255,.06);">
-                        <div class="tag mb-1">LICENÃ‡A MENSAL</div>
-                        R$Â 1.000<span style="font-size:.875rem;font-weight:400;color:rgba(255,255,255,.35);">/mÃªs</span>
-                    </div>
-                </div>
-
-                <div class="mod-card featured" style="position:relative;">
-                    <div
-                        style="position:absolute;top:.5rem;right:1.5rem;background:var(--c);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.15em;padding:.25rem .6rem;text-transform:uppercase;">
-                        MAIS PEDIDO</div>
-                    <div class="tag mb-8" style="color:rgba(0,229,255,.9)">[ 02_PRO ]</div>
-                    <h3
-                        style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;color:var(--c);text-shadow:0 0 30px rgba(0,229,255,.2);">
-                        IA + Humano<br>Integrados</h3>
-                    <p class="text-white/70 text-sm leading-relaxed mb-8 font-medium">Para clÃ­nicas que precisam unir a
-                        rapidez da IA com o fechamento humano.</p>
-                    <ul style="list-style:none;flex:1;" class="text-sm text-white/80">
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> 500 Conversas mensais</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> 5 ConexÃµes de WhatsApp</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> Fluxo hÃ­brido IA + humano</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> IntegraÃ§Ã£o com CRM e ferramentas</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> Painel Omnichannel + Dashboards</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--c);flex-shrink:0;">â†’</span> Encaminhar para humano com histÃ³rico</li>
-                    </ul>
-                    <div class="mod-price" style="border-top:1px solid rgba(0,229,255,.15);">
-                        <div class="tag mb-1" style="color:rgba(0,229,255,.5);">LICENÃ‡A MENSAL</div>
-                        <span style="color:var(--c);text-shadow:0 0 20px rgba(0,229,255,.3);">R$Â 1.500</span><span
-                            style="font-size:.875rem;font-weight:400;color:rgba(255,255,255,.35);">/mÃªs</span>
-                    </div>
-                </div>
-
-                <div class="mod-card">
-                    <div class="tag mb-8">[ 03_ADVANCED ]</div>
-                    <h3
-                        style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;line-height:1.1;margin-bottom:1rem;">
-                        Ecossistema<br>Definitivo</h3>
-                    <p class="text-white/40 text-sm leading-relaxed mb-8">Para clÃ­nicas de alto fluxo com follow-up
-                        inteligente e NPS automÃ¡tico.</p>
-                    <ul style="list-style:none;flex:1;" class="text-sm text-white/55">
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> 1.000 Conversas mensais</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> 10 ConexÃµes de WhatsApp</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> Disparador AutomÃ¡tico + Follow-Up</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> CompreensÃ£o de imagens (carteirinha)</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> IA de NPS (Pesquisa de SatisfaÃ§Ã£o)</li>
-                        <li style="margin-bottom:.75rem;display:flex;gap:.75rem;align-items:flex-start;"><span
-                                style="color:var(--t);flex-shrink:0;">â†’</span> IncorporaÃ§Ã£o ao site da clÃ­nica</li>
-                    </ul>
-                    <div class="mod-price" style="border-top:1px solid rgba(255,255,255,.06);">
-                        <div class="tag mb-1">LICENÃ‡A MENSAL</div>
-                        R$Â 2.500<span style="font-size:.875rem;font-weight:400;color:rgba(255,255,255,.35);">/mÃªs</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gsap-reveal" style="margin-top:3rem;text-align:center;">
-                <a href="#contato" class="cta-main" style="display:inline-flex;">
-                    Escolher Plano e Agendar Mapeamento
-                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-                        <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-32 pb-20 px-6 flex flex-col justify-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="flex flex-col items-start gsap-reveal">
+                <span class="tag-badge mb-6">IA Especializada // Secretária Virtual</span>
+                <h1 class="font-headline text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-6">
+                    Sua recepção perde pacientes <span class="text-primary italic">no WhatsApp.</span><br />
+                    <span class="text-accent">IA resolve.</span>
+                </h1>
+                <p class="text-textMuted text-lg md:text-xl max-w-lg mb-10 leading-relaxed text-balance">
+                    Implemento um ecossistema de atendimento por IA que <strong class="text-textMain">responde em
+                        segundos, qualifica convínios e agenda consultas 24h</strong>. Fim da fila de espera e do
+                    desperdício de leads.
+                </p>
+                <a href="#infraestrutura" class="btn-premium hover-lift hover:pr-6">
+                    Ver Planos e Agendar
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="ml-2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </a>
             </div>
-        </section>
 
-        <!-- EXTRA: TRÃFEGO -->
-        <section class="section" style="border-top:1px solid var(--border);">
-            <div class="gsap-reveal"
-                style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:5rem;align-items:center;">
-                <div>
-                    <span class="section-label">[ SERVIÃ‡O EXTRA ]</span>
-                    <h2 class="section-title" style="font-size:clamp(2rem,4vw,4rem);">Mais pacientes<br><span
-                            class="text-t">no WhatsApp?</span></h2>
-                </div>
-                <div>
-                    <p style="color:rgba(13,31,31,.6);" class="text-base leading-relaxed mb-6">A IA especializada resolve o gargalo do
-                        atendimento.
-                        Mas se a sua clÃ­nica precisa de mais volume, nÃ³s resolvemos isso direto na nossa reuniÃ£o de
-                        mapeamento.</p>
-                    <p style="color:rgba(13,31,31,.6);" class="text-base leading-relaxed">OfereÃ§o a <strong style="color:var(--fg);">GestÃ£o de
-                            TrÃ¡fego Pago</strong> (Google e Meta Ads) como contrato Ã  parte. Depois que o seu balde nÃ£o
-                        tem mais furos no WhatsApp, abrimos a torneira dos anÃºncios para encher a agenda com
-                        previsibilidade.</p>
+            <div class="relative flex justify-center lg:justify-end gsap-reveal" style="transition-delay: 0.2s;">
+                <!-- Abstract Representation of Automation/Speed without heavy SVGs -->
+                <div
+                    class="relative w-full max-w-md aspect-square rounded-full border border-[rgba(0,103,125,0.1)] flex items-center justify-center">
+                    <div
+                        class="absolute inset-4 rounded-full border border-[rgba(0,103,125,0.2)] animate-[spin_60s_linear_infinite]">
+                    </div>
+                    <div
+                        class="absolute inset-12 rounded-full border border-[rgba(0,103,125,0.3)] animate-[spin_40s_linear_infinite_reverse]">
+                    </div>
+
+                    <div class="bg-surface card-premium shadow-2xl p-8 z-10 w-3/4 text-center hover-lift">
+                        <div class="tag-badge mb-4 bg-primary/10">Status: Active</div>
+                        <h3 class="font-headline text-2xl font-bold mb-2">Sales Engine</h3>
+                        <p class="text-sm font-mono text-textMuted">01_AQUISIÇÃO</p>
+                        <p class="text-sm font-mono text-textMuted border-y border-border py-2 my-2">02_ATENDIMENTO</p>
+                        <p class="text-sm font-mono text-textMuted">03_ESCALA</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ISCA DIGITAL -->
-        <section class="section" style="border-top:1px solid var(--border);">
-            <div class="gsap-reveal glass"
-                style="padding:4rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:center;">
-                <div>
-                    <span class="section-label">[ ISCA DIGITAL ]</span>
-                    <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,3.5rem);">Onde sua clÃ­nica
-                        estÃ¡<br><span class="text-t">perdendo dinheiro?</span></h2>
-                </div>
-                <div>
-                    <p class="text-white/50 text-base leading-relaxed mb-8">Baixe o e-book <strong style="color:var(--fg);">â€œO
-                            Sistema 15/15â€</strong> e descubra como a falta de padronizaÃ§Ã£o na entrada de contatos
-                        destrÃ³i o seu faturamento.</p>
-                    <a href="#contato" class="cta-main"
-                        style="display:inline-flex;background:transparent;border:1px solid rgba(0,229,255,.4);color:var(--c);">
-                        Baixar E-book Gratuito
-                        <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
+    <!-- O Gargalo -->
+    <section class="py-24 bg-surfaceAlt border-y border-border">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div class="gsap-reveal">
+                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ O GARGALO ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold mb-8">
+                    Lentidão no <span class="text-accent">atendimento</span> <span class="text-textMuted">custa
+                        caro.</span>
+                </h2>
+                <p class="text-lg text-textMuted leading-relaxed">
+                    O problema não é falta de pacientes. É o gargalo no atendimento. Se o paciente clica no seu anúncio
+                    e a recepção demora a responder, é <strong class="text-textMain">dinheiro de tráfego jogado no
+                        lixo</strong>. O problema é falha de processo.
+                </p>
             </div>
 
-            <section id="contato" class="section" style="border-top:1px solid var(--border);">
-                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:5rem;align-items:start;"
-                    class="gsap-reveal">
+            <div class="space-y-6 gsap-reveal" style="transition-delay: 0.2s;">
+                <div class="card-premium hover-lift p-6">
+                    <div class="tag-badge mb-3">01 // FORA DO HORÁRIO</div>
+                    <p class="text-textMuted"><strong class="text-textMain">35%</strong> das mensagens chegam fora do
+                        horário comercial. Sua clínica fecha, mas a dor do paciente não espera.</p>
+                </div>
+                <div class="card-premium hover-lift p-6">
+                    <div class="tag-badge mb-3">02 // VELOCIDADE</div>
+                    <p class="text-textMuted"><strong class="text-textMain">68%</strong> das pessoas que não recebem
+                        resposta em até 5 minutos fecham com a concorrência.</p>
+                </div>
+                <div class="card-premium hover-lift p-6 border-accent/30 bg-accent/5">
+                    <div class="tag-badge mb-3 bg-accent/20 text-accent">03 // VERBA PERDIDA</div>
+                    <p class="text-textMuted">Sem um sistema conectado, cada lead que não é atendido a tempo é dinheiro
+                        de anúncio evaporado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 border-b border-border stats-trigger">
+        <div
+            class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-border">
+            <div class="pt-8 md:pt-0 pb-8 md:pb-0 gsap-reveal">
+                <div class="font-headline font-bold text-6xl text-textMain mb-2"><span class="counter"
+                        data-val="174">0</span>K+</div>
+                <div class="font-mono text-sm tracking-widest text-textMuted uppercase">Leads Gerenciados</div>
+            </div>
+            <div class="py-8 md:py-0 gsap-reveal">
+                <div class="font-headline font-bold text-6xl text-textMain mb-2"><span class="counter"
+                        data-val="24">0</span>K+</div>
+                <div class="font-mono text-sm tracking-widest text-textMuted uppercase">Vendas Realizadas</div>
+            </div>
+            <div class="pt-8 md:pt-0 gsap-reveal">
+                <div class="font-headline font-bold text-6xl text-textMain mb-2">R$<span class="counter" data-val="1.6"
+                        data-dec="true">0</span>M</div>
+                <div class="font-mono text-sm tracking-widest text-textMuted uppercase">Em Mídia Otimizada</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfil Section -->
+    <section id="sobre" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="profile-img-wrap shadow-2xl h-[600px] w-full max-w-md mx-auto gsap-reveal">
+                <img src="photo_5035048774975731278_y.jpg" alt="Wagner Sá Lima"
+                    class="w-full h-full object-cover object-top grayscale-[20%] hover:grayscale-0 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.8)] to-transparent"></div>
+                <div class="absolute top-6 left-6 tag-badge bg-surface text-textMain shadow-lg">SYS_ADMIN</div>
+            </div>
+
+            <div class="gsap-reveal" style="transition-delay: 0.2s;">
+                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ O ARQUITETO DA IA
+                    ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold mb-8">Wagner <span
+                        class="text-primary italic">Sá Lima.</span></h2>
+
+                <div class="space-y-6 text-textMuted text-lg leading-relaxed mb-8">
+                    <p>Estrategista Comercial e especialista em <strong class="text-textMain">Automação e Inteligência
+                            Artificial</strong>. Construo sistemas que trabalham enquanto você foca no que precisa do
+                        seu tempo.</p>
+                    <p>Há 11 anos atuo dentro do <strong class="text-textMain">Grupo Nobre</strong>, um dos maiores
+                        conglomerados da Bahia, como um dos estrategistas pela operação comercial e tecnológica.</p>
+                    <p>Essa experiência em escala real dentro de uma organização de alto padrão é o que diferencia a
+                        <strong class="text-textMain">IA especializada</strong> de qualquer solução genérica.</p>
+                </div>
+
+                <div class="bg-surfaceAlt border border-border p-6 rounded-lg flex items-center gap-6">
                     <div>
-                        <span class="section-label">[ INICIAR PROTOCOLO ]</span>
-                        <h2 class="section-title">Profissionalizar<br><span class="text-c">a recepÃ§Ã£o</span></h2>
-                        <p style="color:rgba(13,31,31,.55);" class="text-sm leading-relaxed mt-6">Elimine o trabalho braÃ§al da equipe e pare
-                            de perder pacientes. Preencha ao lado e fale diretamente com Wagner no WhatsApp.</p>
+                        <div class="font-headline font-bold text-xl text-textMain mb-1">Grupo Nobre</div>
+                        <div class="font-mono text-xs text-textMuted uppercase">Credencial · 11 anos</div>
                     </div>
-                    <div style="padding-top:1rem;">
-                        <form name="leads-medicos" method="POST" data-netlify="true">
-                            <div class="form-field">
-                                <label class="form-label">NOME DA CLÃNICA / DOUTOR(A)</label>
-                                <input type="text" name="nome" required placeholder="Nome Completo">
-                            </div>
-                            <div class="form-field">
-                                <label class="form-label">WHATSAPP PROFISSIONAL</label>
-                                <input type="tel" name="whatsapp" required placeholder="(75) 00000-0000">
-                            </div>
-                            <button type="submit" class="cta-main"
-                                style="width:100%;justify-content:center;margin-top:1rem;">
-                                Falar com Wagner no WhatsApp
-                                <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-                                    <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                        </form>
+                    <div class="w-px h-12 bg-border"></div>
+                    <div class="text-sm text-textMuted">Educação · Saúde<br>Feira de Santana, BA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-24 bg-surfaceAlt border-y border-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 text-center gsap-reveal">
+                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ RESULTADOS ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold">A Prova do <span
+                        class="text-accent">Protocolo</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Depoimento 1 -->
+                <div class="card-premium hover-lift gsap-reveal">
+                    <div class="tag-badge mb-6">ID_01 // NUTRÓLOGA</div>
+                    <p class="text-textMuted italic mb-8 flex-1">"Antes o meu WhatsApp só recebia curiosos... Após a
+                        implantação, a IA qualificou os pacientes e minha taxa de agendamentos particulares triplicou em
+                        60 dias."</p>
+                    <div class="border-t border-border mt-auto pt-6">
+                        <div class="font-headline font-bold text-lg">Dra. Camila M.</div>
+                        <div class="text-sm text-textMuted">Clínica de Performance</div>
                     </div>
                 </div>
-            </section>
 
-            <footer
-                style="padding:2rem 6vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                <span class="tag">Â© 2026 Wagner Filipe // IA Especializada para ClÃ­nicas</span>
-                <div style="display:flex;gap:2rem;" class="tag">
-                    <a href="#" style="color:inherit;text-decoration:none;" onmouseover="this.style.color='var(--c)'"
-                        onmouseout="this.style.color='inherit'">Digital Integrity</a>
-                    <a href="#" style="color:inherit;text-decoration:none;" onmouseover="this.style.color='var(--c)'"
-                        onmouseout="this.style.color='inherit'">Sales Ops Systems</a>
+                <!-- Depoimento 2 -->
+                <div class="card-premium hover-lift gsap-reveal" style="transition-delay: 0.1s;">
+                    <div class="tag-badge mb-6">ID_02 // CLÍNICA MÉDICA</div>
+                    <p class="text-textMuted italic mb-8 flex-1">"A IA começou a responder no WhatsApp no mesmo segundo
+                        que o lead chegava. Não perdemos mais nenhum contato por demora. A recepção ficou livre."</p>
+                    <div class="border-t border-border mt-auto pt-6">
+                        <div class="font-headline font-bold text-lg">Dr. Rafael V.</div>
+                        <div class="text-sm text-textMuted">Longevidade & Saúde</div>
+                    </div>
                 </div>
-            </footer>
-    </main>
 
+                <!-- Depoimento Destaque -->
+                <div class="card-premium hover-lift bg-primary text-white border-none gsap-reveal"
+                    style="transition-delay: 0.2s;">
+                    <div class="tag-badge bg-white/20 text-white border-none mb-6">LÍDER DE REFERÊNCIA</div>
+                    <p class="text-white/80 italic mb-8 flex-1">"A excelência não é um destino, é um hábito diário. O
+                        Wagner carrega o DNA da operação e dedicação ao longo desses 11 anos conosco no Grupo Nobre."
+                    </p>
+                    <div class="border-t border-white/20 mt-auto pt-6 flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center font-bold font-headline">
+                            JS</div>
+                        <div>
+                            <div class="font-headline font-bold text-lg">Prof. Jodilton Souza</div>
+                            <div class="text-sm text-white/70">Presidente · Grupo Nobre</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos / Infraestrutura -->
+    <section id="infraestrutura" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 max-w-2xl mx-auto gsap-reveal">
+                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ SELECIONE SEU PLANO
+                    ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold mb-6">Quanto custa <span
+                        class="text-accent">implementar?</span></h2>
+                <p class="text-textMuted">O projeto é dividido em Setup (mapeamento e criação) e a licença mensal ideal
+                    para o fluxo da sua clínica.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plano 1 -->
+                <div class="card-premium hover-lift flex flex-col gsap-reveal">
+                    <div class="tag-badge mb-6">01_ESSENTIAL</div>
+                    <h3 class="font-headline font-bold text-2xl mb-2">Para Iniciar</h3>
+                    <p class="text-sm text-textMuted mb-8 pb-8 border-b border-border">Ideal para clínicas que querem
+                        automatizar o básico.</p>
+                    <ul class="space-y-4 text-sm text-textMuted mb-8 flex-1">
+                        <li class="flex gap-3"><span class="text-primary">→</span> 250 Conversas/mês</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> 2 Conexões WhatsApp</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> IA de agendamento</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> Compreensão de áudios</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="text-xs font-mono text-textMuted mb-1">LICENÇA MENSAL</div>
+                        <div class="font-headline font-bold text-3xl">R$ 1.000<span
+                                class="text-lg text-textMuted font-normal">/mês</span></div>
+                    </div>
+                </div>
+
+                <!-- Plano 2 Destaque -->
+                <div
+                    class="card-premium hover-lift flex flex-col border-primary/50 shadow-xl shadow-primary/5 relative gsap-reveal transform md:-translate-y-4">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                    <div
+                        class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+                        RECOMENDADO</div>
+
+                    <div class="tag-badge mb-6 bg-primary/10 text-primary">02_PRO</div>
+                    <h3 class="font-headline font-bold text-2xl mb-2 text-primary">IA + Humano</h3>
+                    <p class="text-sm text-textMuted mb-8 pb-8 border-b border-border">Une a rapidez da IA com o
+                        fechamento humano.</p>
+                    <ul class="space-y-4 text-sm text-textMuted mb-8 flex-1">
+                        <li class="flex gap-3 text-textMain font-medium"><span class="text-primary">→</span> 500
+                            Conversas/mês</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> 5 Conexões WhatsApp</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> Integração com CRM</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> Painel Omnichannel</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="text-xs font-mono text-textMuted mb-1">LICENÇA MENSAL</div>
+                        <div class="font-headline font-bold text-3xl text-primary">R$ 1.500<span
+                                class="text-lg text-textMuted font-normal">/mês</span></div>
+                    </div>
+                </div>
+
+                <!-- Plano 3 -->
+                <div class="card-premium hover-lift flex flex-col gsap-reveal">
+                    <div class="tag-badge mb-6">03_ADVANCED</div>
+                    <h3 class="font-headline font-bold text-2xl mb-2">Ecossistema</h3>
+                    <p class="text-sm text-textMuted mb-8 pb-8 border-b border-border">Para clínicas de alto fluxo com
+                        follow-up.</p>
+                    <ul class="space-y-4 text-sm text-textMuted mb-8 flex-1">
+                        <li class="flex gap-3"><span class="text-primary">→</span> 1.000 Conversas/mês</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> 10 Conexões WhatsApp</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> Disparador Automático</li>
+                        <li class="flex gap-3"><span class="text-primary">→</span> IA de NPS (Pesquisa)</li>
+                    </ul>
+                    <div class="mt-auto pt-8">
+                        <a href="#contato" class="btn-premium w-full">Falar com Consultor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário e Contato (Arquitetura Webhooks) -->
+    <section id="contato" class="py-24 bg-surfaceAlt border-t border-border">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="gsap-reveal">
+                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ INICIAR PROTOCOLO
+                    ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold mb-6">Profissionalizar <br><span
+                        class="text-accent">a recepção.</span></h2>
+                <p class="text-lg text-textMuted leading-relaxed mb-8">
+                    Elimine o trabalho braçal da equipe e pare de perder pacientes. Preencha os dados e fale diretamente
+                    com Wagner no WhatsApp.
+                </p>
+                <div class="flex items-center gap-4 text-sm font-mono text-textMuted font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    DISPONÍVEL PARA APLICAÇÃO
+                </div>
+            </div>
+
+            <div class="bg-surface p-8 rounded-2xl shadow-xl border border-border gsap-reveal">
+                <form id="leadForm" name="leads-medicos" method="POST" data-netlify="true" class="space-y-6">
+                    <div>
+                        <label class="form-label" for="nome">Nome da Clínica / Doutor(a)</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Ex: Clínica Saúde Certa"
+                            class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label" for="whatsapp">WhatsApp Profissional</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(00) 00000-0000"
+                            class="form-input">
+                    </div>
+                    <button type="submit" class="btn-premium w-full mt-4 justify-center">
+                        Falar com Wagner no WhatsApp
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg>
+                    </button>
+                    <p class="text-center text-xs text-textMuted mt-4">Suas informações estão seguras conosco.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center border-t border-border bg-surface">
+        <p class="font-mono text-xs text-textMuted">&copy; 2026 Wagner Filipe // Sistemas de Alta Performance <br />
+            Projetado para Escala & Autoridade.</p>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // 2. HERO ENTRADA & SVG MACHINE
-        function startHero() {
-            anime({ targets: '#msv', opacity: [0, 1], scale: [.9, 1], duration: 1600, easing: 'easeOutExpo', delay: 200 });
-            anime({ targets: ['#ld', '#lm', '#lf', '#ll'], opacity: [0, 1], delay: anime.stagger(180, { start: 400 }), duration: 1000, easing: 'easeOutExpo' });
-            anime({ targets: '.hl-inner', translateY: ['110%', '0%'], delay: anime.stagger(70, { start: 300 }), duration: 1000, easing: 'easeOutExpo' });
-
-            setTimeout(() => {
-                document.querySelector('.hero-tag').style.opacity = '1'; document.querySelector('.hero-tag').style.transition = 'opacity .6s';
-                document.getElementById('htag2').style.opacity = '1'; document.getElementById('htag2').style.transition = 'opacity .6s';
-                document.getElementById('hfade').style.opacity = '1'; document.getElementById('hfade').style.transition = 'opacity .8s';
-                document.getElementById('hcta').style.opacity = '1'; document.getElementById('hcta').style.transition = 'opacity .8s .15s';
-            }, 800);
-        }
-        startHero();
-
-        // MÃ¡quina Idle
-        anime({ targets: '#rcw', rotate: 360, loop: true, duration: 10000, easing: 'linear', transformOrigin: '250px 250px' });
-        anime({ targets: '#rccw', rotate: -360, loop: true, duration: 7000, easing: 'linear', transformOrigin: '250px 250px' });
-        anime({ targets: '#lm circle:first-child', rotate: 360, loop: true, duration: 45000, easing: 'linear', transformOrigin: '250px 250px' });
-        anime({ targets: '#cdot', scale: [1, 1.7, 1], opacity: [.9, .3, .9], loop: true, duration: 2200, easing: 'easeInOutSine', transformOrigin: '250px 250px' });
-
-        [['#ntop circle:last-child', 0], ['#nright circle:last-child', 600], ['#nleft circle:last-child', 1200]].forEach(([s, d]) => {
-            anime({ targets: s, scale: [1, 2.2, 1], opacity: [.9, .1, .9], loop: true, duration: 1800, delay: d, easing: 'easeInOutSine', transformOrigin: 'center center' });
-        });
-        anime({ targets: '#nbot circle:last-child', scale: [1, 2.8, 1], opacity: [1, .05, 1], loop: true, duration: 2000, easing: 'easeInOutQuad', transformOrigin: 'center center' });
-
-        [{ id: '#p1', fx: 250, fy: 132, tx: 250, ty: 250, d: 0 }, { id: '#p2', fx: 368, fy: 250, tx: 250, ty: 250, d: 400 }, { id: '#p3', fx: 132, fy: 250, tx: 250, ty: 250, d: 800 }, { id: '#p4', fx: 250, fy: 250, tx: 250, ty: 368, d: 1200 }, { id: '#p5', fx: 328, fy: 172, tx: 250, ty: 250, d: 600 }, { id: '#p6', fx: 172, fy: 328, tx: 250, ty: 250, d: 1000 },
-        ].forEach(({ id, fx, fy, tx, ty, d }) => {
-            anime({ targets: id, cx: [fx, tx], cy: [fy, ty], opacity: [0, 1, 1, 0], loop: true, duration: 1400, delay: d, easing: 'easeInOutQuad' });
-        });
-
-        // 4. PARALLAX DO MOUSE
-        let mx = 0, my = 0, px2 = 0, py2 = 0;
-        const lerp = (a, b, t) => a + (b - a) * t;
-
-        document.addEventListener('mousemove', e => {
-            mx = (e.clientX / window.innerWidth - .5) * 2;
-            my = (e.clientY / window.innerHeight - .5) * 2;
-        });
-
-        const rafP = () => {
-            px2 = lerp(px2, mx, .03);
-            py2 = lerp(py2, my, .03);
-            const ld = document.getElementById('ld'), lm = document.getElementById('lm'),
-                lf = document.getElementById('lf'), ll = document.getElementById('ll');
-            if (ld && window.innerWidth > 768) {
-                ld.style.transform = `translate(${px2 * 20}px,${py2 * 13}px)`;
-                lm.style.transform = `translate(${px2 * 10}px,${py2 * 7}px)`;
-                lf.style.transform = `translate(${px2 * 5}px,${py2 * 3}px) rotate(${px2 * 1.5}deg)`;
-                ll.style.transform = `translate(${px2 * 15}px,${py2 * 10}px)`;
-            }
-            requestAnimationFrame(rafP);
-        };
-        rafP();
-
-
-        // 6. SCROLL GSAP
-        document.querySelectorAll('.gsap-reveal').forEach(el => {
-            gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' }, y: 50, opacity: 0, duration: 1.2, ease: 'power3.out' });
-        });
-
-        ScrollTrigger.create({
-            trigger: '.stats-trigger', start: 'top 85%', once: true,
-            onEnter: () => {
-                document.querySelectorAll('.counter').forEach(el => {
-                    const t = parseFloat(el.getAttribute('data-val'));
-                    anime({ targets: el, innerHTML: [0, t], round: el.dataset.dec ? 10 : 1, easing: 'easeOutExpo', duration: 2500 });
-                });
-            }
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>
