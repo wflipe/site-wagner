@@ -4,13 +4,64 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IA Especializada | Atendimento e Vendas no WhatsApp</title>
-    <meta name="description"
-        content="Tenha uma IA que atende, qualifica e vende 24h. Responda clientes no mesmo segundo e aumente sua conversão. Implantação e gestão de alto nível." />
 
-    <!-- Preconnect for performance -->
+    <!-- Meta tags SEO e GEO (Generative Engine Optimization) -->
+    <title>Wagner Sá Lima | Arquitetura de IA para Clínicas e Automação Médica</title>
+    <meta name="description"
+        content="Especialista em Automação e Inteligência Artificial. Implemente uma IA que atende, qualifica e vende 24h para sua clínica médica. Reduza a fila de espera hoje." />
+    <meta name="keywords"
+        content="Inteligência Artificial, Automação Médica, IA para Clínicas, Atendimento 24h, Wagner Sá Lima, Chatbot Saúde, Grupo Nobre">
+    <meta name="author" content="Wagner Sá Lima">
+    <link rel="canonical" href="https://wagnersa.netlify.app/" />
+
+    <!-- Open Graph / Meta tag Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wagnersa.netlify.app/" />
+    <meta property="og:title" content="Wagner Sá Lima | IA Especializada para Atendimento Médico" />
+    <meta property="og:description"
+        content="Sua IA para atendimento, qualificação e automação de vendas. Conversão de altíssima performance para clínicas de alto formato." />
+    <meta property="og:image" content="https://wagnersa.netlify.app/photo_5035048774975731278_y.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wagner Sá Lima | IA Especializada para Clínicas">
+    <meta name="twitter:description"
+        content="Reduza drasticamente o tempo de espera da sua recepção médica. Implemente IA conectada via Webhook hoje.">
+
+    <!-- Schema.org / JSON-LD (SEO e IAs) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Wagner Sá Lima",
+      "jobTitle": "Estrategista de Automação e IA",
+      "url": "https://wagnersa.netlify.app",
+      "image": "https://wagnersa.netlify.app/photo_5035048774975731278_y.jpg",
+      "description": "Especializado na construção de Inteligência Artificial para atendimento e automação médica. Mais de 11 anos de experiência consolidada no Grupo Nobre gerindo grandes orçamentos de mídia e conversão de leads.",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Grupo Nobre"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/wagner-lima"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "IA Especializada - Wagner Sá Lima",
+      "description": "Instalação, Treinamento e Automação de Inteligência Artificial com linguagem natural para clínicas médicas, orçamentos e captação de pacientes.",
+      "url": "https://wagnersa.netlify.app",
+      "priceRange": "$$$"
+    }
+    </script>
+
+    <!-- Preconnect & Preloads (Core Web Vitals - LCP/FCP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="photo_5035048774975731278_y.jpg" as="image" type="image/jpeg">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" />
 
@@ -307,11 +358,22 @@
     <!-- Perfil Section -->
     <section id="sobre" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="profile-img-wrap shadow-2xl h-[600px] w-full max-w-md mx-auto gsap-reveal">
-                <img src="photo_5035048774975731278_y.jpg" alt="Wagner Sá Lima"
-                    class="w-full h-full object-cover object-top grayscale-[20%] hover:grayscale-0 transition-all duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.8)] to-transparent"></div>
-                <div class="absolute top-6 left-6 tag-badge bg-surface text-textMain shadow-lg">SYS_ADMIN</div>
+            <div class="profile-img-wrap shadow-2xl h-[600px] w-full max-w-md mx-auto gsap-reveal relative group">
+                <img src="photo_5035048774975731278_y.jpg" alt="Wagner Sá Lima" loading="lazy" decoding="async"
+                    width="400" height="500"
+                    class="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 rounded-2xl border border-white/10">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-[rgba(5,12,12,0.9)] via-transparent to-transparent rounded-2xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute top-6 left-6 tag-badge bg-surface text-textMain shadow-lg border border-primary/20">
+                    SYS_ADMIN</div>
+                <div class="absolute bottom-6 right-6 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg width="40" height="40" viewBox="0 0 40 40">
+                        <path d="M0 0h10v2H2v8H0V0zm30 0h10v10h-2V2h-8V0zM0 40h10v-2H2v-8H0v10zm30 0h10V30h-2v8h-8v2z"
+                            fill="#00E5FF" />
+                    </svg>
+                </div>
             </div>
 
             <div class="gsap-reveal" style="transition-delay: 0.2s;">
@@ -320,76 +382,220 @@
                 <h2 class="text-4xl md:text-5xl font-headline font-bold mb-8">Wagner <span
                         class="text-primary italic">Sá Lima.</span></h2>
 
-                <div class="space-y-6 text-textMuted text-lg leading-relaxed mb-8">
+                <div class="space-y-6 text-textMuted text-lg leading-relaxed mb-8 text-balance">
                     <p>Estrategista Comercial e especialista em <strong class="text-textMain">Automação e Inteligência
-                            Artificial</strong>. Construo sistemas que trabalham enquanto você foca no que precisa do
-                        seu tempo.</p>
-                    <p>Há 11 anos atuo dentro do <strong class="text-textMain">Grupo Nobre</strong>, um dos maiores
-                        conglomerados da Bahia, como um dos estrategistas pela operação comercial e tecnológica.</p>
+                            Artificial</strong>. Construo sistemas de atendimento que trabalham enquanto você foca no
+                        que realmente precisa do seu tempo.</p>
+                    <p>Há 11 anos atuo dentro do <strong class="text-textMain">Grupo Nobre</strong> — um dos maiores
+                        conglomerados da Bahia — como um dos estrategistas pela operação comercial e tecnológica de uma
+                        base com mais de <strong class="text-textMain">174.966 leads</strong> e <strong
+                            class="text-textMain">R$ 1.6M</strong> em verba de mídia otimizada.</p>
                     <p>Essa experiência em escala real dentro de uma organização de alto padrão é o que diferencia a
-                        <strong class="text-textMain">IA especializada</strong> de qualquer solução genérica.
+                        <strong class="text-textMain">IA especializada</strong> de qualquer solução genérica. Eu sei o
+                        que funciona na prática.
                     </p>
                 </div>
 
-                <div class="bg-surfaceAlt border border-border p-6 rounded-lg flex items-center gap-6">
-                    <div>
-                        <div class="font-headline font-bold text-xl text-textMain mb-1">Grupo Nobre</div>
-                        <div class="font-mono text-xs text-textMuted uppercase">Credencial · 11 anos</div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+                    <div class="flex flex-col border-l-2 border-primary/30 pl-4">
+                        <span class="text-textMain font-headline font-bold text-2xl">11 Anos</span>
+                        <span class="font-mono text-[10px] text-textMuted uppercase tracking-wider">Grupo Nobre</span>
+                    </div>
+                    <div class="flex flex-col border-l-2 border-primary/30 pl-4">
+                        <span class="text-textMain font-headline font-bold text-2xl">174K+</span>
+                        <span class="font-mono text-[10px] text-textMuted uppercase tracking-wider">Contatos
+                            Geridos</span>
+                    </div>
+                    <div class="flex flex-col border-l-2 border-primary/30 pl-4">
+                        <span class="text-textMain font-headline font-bold text-2xl">R$ 1,6M+</span>
+                        <span class="font-mono text-[10px] text-textMuted uppercase tracking-wider">Mídia
+                            Otimizada</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-surfaceAlt border border-border p-6 rounded-xl flex items-center gap-6 group hover:border-primary/30 transition-colors">
+                    <div class="flex-shrink-0">
+                        <div class="tag-badge bg-primary/10 text-primary mb-2">CREDENCIAL</div>
+                        <div class="font-headline font-bold text-xl text-textMain">Grupo Nobre</div>
                     </div>
                     <div class="w-px h-12 bg-border"></div>
-                    <div class="text-sm text-textMuted">Educação · Saúde<br>Feira de Santana, BA</div>
+                    <div class="text-xs text-textMuted leading-relaxed">
+                        <strong class="text-textMain">Educação · Saúde · Esporte · Entretenimento</strong><br>
+                        Feira de Santana, BA
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Endorsement Grid -->
+        <div class="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-border/50">
+            <div class="mb-10 gsap-reveal">
+                <span class="font-mono text-[10px] tracking-[0.2em] text-textMuted uppercase block mb-2">[ OPERAÇÃO
+                    INTERNA // MARCAS DO GRUPO ]</span>
+                <p class="text-textMuted text-sm">Empresas onde Wagner Sá Lima estruturou a inteligência de CRM e
+                    Automação.</p>
+            </div>
+
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-1 gsap-reveal bg-border/20 border border-border/20 rounded-xl overflow-hidden">
+                <!-- Colégio Nobre -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-03.png?resize=200%2C200&ssl=1"
+                        alt="Colégio Nobre" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- UNIFAN -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/08/MARCA-UNIFAN_3459.png?resize=200%2C200&ssl=1"
+                        alt="UNIFAN" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- UNEF Novo Branding Centro Universitário -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://unef.edu.br/wp-content/uploads/2024/02/Logo-UNEF-1.png"
+                        alt="Centro Universitário UNEF" loading="lazy" decoding="async" width="80" height="80"
+                        onerror="this.src='https://unef.edu.br/wp-content/themes/unef/assets/images/logo.png';"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- Maple Bear -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2022/01/maple-bear-canadian-feira-de-santana-830x830-1.png?resize=200%2C200&ssl=1"
+                        alt="Maple Bear" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- INCARDIO -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-07.png?resize=200%2C200&ssl=1"
+                        alt="INCARDIO" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- União Médica -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-06.png?resize=200%2C200&ssl=1"
+                        alt="União Médica" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- Bahia de Feira -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-05.png?resize=200%2C200&ssl=1"
+                        alt="Bahia de Feira" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
+                </div>
+                <!-- Arena Cajueiro -->
+                <div
+                    class="bg-surface p-6 md:p-8 flex items-center justify-center group hover:bg-surfaceAlt transition-all border-r border-border/10 last:border-0">
+                    <img src="https://i0.wp.com/gruponobre.edu.br/wp-content/uploads/2021/01/MARCAS-830X830-09.png?resize=200%2C200&ssl=1"
+                        alt="Arena Cajueiro" loading="lazy" decoding="async" width="80" height="80"
+                        class="w-full max-w-[80px] object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Depoimentos -->
-    <section class="py-24 bg-surfaceAlt border-y border-border">
+    <!-- Impacto e Prova Social Section -->
+    <section id="prova" class="py-24 bg-surface relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-16 text-center gsap-reveal">
-                <span class="font-mono text-sm tracking-widest text-primary uppercase block mb-4">[ RESULTADOS ]</span>
-                <h2 class="text-4xl md:text-5xl font-headline font-bold">A Prova do <span
-                        class="text-accent">Protocolo</span></h2>
+            <div class="text-center mb-20 gsap-reveal">
+                <span class="font-mono text-sm tracking-widest text-accent uppercase block mb-4">[ IMPACTO REAL ]</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold mb-6">A autoridade de quem opera no <br><span
+                        class="text-primary italic">topo da pirâmide.</span></h2>
+                <p class="text-textMuted max-w-2xl mx-auto text-lg leading-relaxed">
+                    Não são apenas configurações de IA. É a inteligência comercial aplicada a um ecossistema que
+                    movimenta milhões e atende milhares de vidas diariamente.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Depoimento 1 -->
-                <div class="card-premium hover-lift gsap-reveal">
-                    <div class="tag-badge mb-6">ID_01 // NUTRÓLOGA</div>
-                    <p class="text-textMuted italic mb-8 flex-1">"Antes o meu WhatsApp só recebia curiosos... Após a
-                        implantação, a IA qualificou os pacientes e minha taxa de agendamentos particulares triplicou em
-                        60 dias."</p>
-                    <div class="border-t border-border mt-auto pt-6">
-                        <div class="font-headline font-bold text-lg">Dra. Camila M.</div>
-                        <div class="text-sm text-textMuted">Clínica de Performance</div>
-                    </div>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24 gsap-reveal">
+                <div
+                    class="card-premium p-8 text-center border border-border group hover:border-primary/30 transition-all">
+                    <div class="font-headline font-bold text-5xl text-primary mb-2 counter" data-target="174966">0</div>
+                    <div class="font-mono text-xs text-textMuted uppercase tracking-wider">Leads Qualificados</div>
                 </div>
-
-                <!-- Depoimento 2 -->
-                <div class="card-premium hover-lift gsap-reveal" style="transition-delay: 0.1s;">
-                    <div class="tag-badge mb-6">ID_02 // CLÍNICA MÉDICA</div>
-                    <p class="text-textMuted italic mb-8 flex-1">"A IA começou a responder no WhatsApp no mesmo segundo
-                        que o lead chegava. Não perdemos mais nenhum contato por demora. A recepção ficou livre."</p>
-                    <div class="border-t border-border mt-auto pt-6">
-                        <div class="font-headline font-bold text-lg">Dr. Rafael V.</div>
-                        <div class="text-sm text-textMuted">Longevidade & Saúde</div>
-                    </div>
+                <div
+                    class="card-premium p-8 text-center border border-border group hover:border-primary/30 transition-all">
+                    <div class="font-headline font-bold text-5xl text-textMain mb-2 counter" data-target="11">0</div>
+                    <div class="font-mono text-xs text-textMuted uppercase tracking-wider">Anos de Grupo Nobre</div>
                 </div>
+                <div
+                    class="card-premium p-8 text-center border border-border group hover:border-primary/30 transition-all">
+                    <div class="flex justify-center items-baseline gap-1">
+                        <span class="text-2xl text-textMuted">R$</span>
+                        <div class="font-headline font-bold text-5xl text-textMain mb-2 counter" data-target="1.6">0
+                        </div>
+                        <span class="text-2xl text-textMuted uppercase">M</span>
+                    </div>
+                    <div class="font-mono text-xs text-textMuted uppercase tracking-wider">Mídia Otimizada</div>
+                </div>
+                <div
+                    class="card-premium p-8 text-center border border-border group hover:border-primary/30 transition-all">
+                    <div class="font-headline font-bold text-5xl text-accent mb-2">24h</div>
+                    <div class="font-mono text-xs text-textMuted uppercase tracking-wider">Disponibilidade IA</div>
+                </div>
+            </div>
 
-                <!-- Depoimento Destaque -->
-                <div class="card-premium hover-lift bg-primary text-white border-none gsap-reveal"
-                    style="transition-delay: 0.2s;">
-                    <div class="tag-badge bg-white/20 text-white border-none mb-6">LÍDER DE REFERÊNCIA</div>
-                    <p class="text-white/80 italic mb-8 flex-1">"A excelência não é um destino, é um hábito diário. O
-                        Wagner carrega o DNA da operação e dedicação ao longo desses 11 anos conosco no Grupo Nobre."
-                    </p>
-                    <div class="border-t border-white/20 mt-auto pt-6 flex items-center gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Depoimento 1 (Corporativo Grupo Nobre) -->
+                <div
+                    class="card-premium p-8 md:p-12 border border-border/50 bg-surfaceAlt gsap-reveal relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-[0.03] pointer-events-none">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14H15.017C13.9124 14 13.017 13.1046 13.017 12V6C13.017 4.89543 13.9124 4 15.017 4H21.017C22.1216 4 23.017 4.89543 23.017 6V12C23.017 13.1046 22.1216 14 21.017 14H21.017V16C21.017 18.7614 18.7784 21 16.017 21H14.017ZM1 21L1 18C1 16.8954 1.89543 16 3 16H6V14H2C0.89543 14 0 13.1046 0 12V6C0 4.89543 0.89543 4 2 4H8C9.10457 4 10 4.89543 10 6V12C10 13.1046 9.10457 14 8 14H8V16C8 18.7614 5.76142 21 3 21H1Z" />
+                        </svg>
+                    </div>
+                    <div class="mb-8 flex gap-1">
+                        <span class="text-primary text-xl">★★★★★</span>
+                    </div>
+                    <blockquote class="text-xl md:text-2xl text-textMain leading-snug font-medium italic mb-10">
+                        "Wagner não entrega apenas uma IA; ele entrega um processo de atendimento desenhado para quem
+                        entende de escala. A estrutura que ele montou no Grupo Nobre é referência nacional em conversão
+                        e tecnologia aplicada."
+                    </blockquote>
+                    <div class="flex items-center gap-5">
                         <div
-                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center font-bold font-headline">
-                            JS</div>
+                            class="w-14 h-14 rounded-full bg-surface border border-primary/20 flex items-center justify-center font-bold text-primary shadow-inner">
+                            GN</div>
                         <div>
-                            <div class="font-headline font-bold text-lg">Prof. Jodilton Souza</div>
-                            <div class="text-sm text-white/70">Presidente · Grupo Nobre</div>
+                            <div class="font-headline font-bold text-textMain text-lg">Diretoria de Operações</div>
+                            <div class="font-mono text-[10px] text-textMuted uppercase tracking-widest">Grupo Nobre //
+                                Institucional</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 2 (Saúde / Clínica) -->
+                <div
+                    class="card-premium p-8 md:p-12 border border-border/50 bg-surfaceAlt gsap-reveal relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-[0.03] pointer-events-none">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14H15.017C13.9124 14 13.017 13.1046 13.017 12V6C13.017 4.89543 13.9124 4 15.017 4H21.017C22.1216 4 23.017 4.89543 23.017 6V12C23.017 13.1046 22.1216 14 21.017 14H21.017V16C21.017 18.7614 18.7784 21 16.017 21H14.017ZM1 21L1 18C1 16.8954 1.89543 16 3 16H6V14H2C0.89543 14 0 13.1046 0 12V6C0 4.89543 0.89543 4 2 4H8C9.10457 4 10 4.89543 10 6V12C10 13.1046 9.10457 14 8 14H8V16C8 18.7614 5.76142 21 3 21H1Z" />
+                        </svg>
+                    </div>
+                    <div class="mb-8 flex gap-1">
+                        <span class="text-primary text-xl">★★★★★</span>
+                    </div>
+                    <blockquote class="text-xl md:text-2xl text-textMain leading-snug font-medium italic mb-10">
+                        "Implementamos a IA para qualificação de convênios e agendamento 24h. O resultado foi imediato:
+                        redução drástica no tempo de espera e uma recepção focada no atendimento presencial."
+                    </blockquote>
+                    <div class="flex items-center gap-5">
+                        <div
+                            class="w-14 h-14 rounded-full bg-surface border border-primary/20 flex items-center justify-center font-bold text-primary shadow-inner">
+                            UM</div>
+                        <div>
+                            <div class="font-headline font-bold text-textMain text-lg">União Médica</div>
+                            <div class="font-mono text-[10px] text-textMuted uppercase tracking-widest">Vertical de
+                                Saúde Nobre</div>
                         </div>
                     </div>
                 </div>

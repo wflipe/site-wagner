@@ -27,33 +27,41 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
-    // Statistic count up
-    const statsTrigger = document.querySelector(".stats-trigger");
-    if (statsTrigger) {
+    // Statistic count up - Globalizado para múltiplas seções (Fix da 3ª Seção e Impacto)
+    const statsSections = document.querySelectorAll(".stats-trigger, #prova");
+    statsSections.forEach(section => {
       ScrollTrigger.create({
-        trigger: statsTrigger,
+        trigger: section,
         start: "top 80%",
         once: true,
         onEnter: () => {
-          document.querySelectorAll(".counter").forEach((counter) => {
-            const target = parseFloat(counter.getAttribute("data-val"));
-            const isDecimal = counter.hasAttribute("data-dec");
+          section.querySelectorAll(".counter").forEach((counter) => {
+            // Suporta tanto data-target novo quanto data-val antigo
+            const targetStr = counter.getAttribute("data-target") || counter.getAttribute("data-val");
+            if (!targetStr) return;
             
-            gsap.to(counter, {
-              innerHTML: target,
-              duration: 2.5,
-              ease: "power2.out",
-              snap: { innerHTML: isDecimal ? 0.1 : 1 },
+            const targetVal = parseFloat(targetStr);
+            const isDecimal = targetStr.includes(".") || counter.hasAttribute("data-dec");
+            
+            // Usamos um objeto proxy para o GSAP animar, evitando que o conteúdo HTML como "K+" ou "M" cause bugs no parsing numérico
+            let proxy = { val: 0 };
+            
+            gsap.to(proxy, {
+              val: targetVal,
+              duration: 3.5,
+              ease: "power3.out",
               onUpdate: function() {
-                counter.innerHTML = isDecimal 
-                  ? Number(this.targets()[0].innerHTML).toFixed(1)
-                  : Math.round(this.targets()[0].innerHTML);
+                if (isDecimal) {
+                  counter.innerHTML = proxy.val.toFixed(1);
+                } else {
+                  counter.innerHTML = Math.round(proxy.val).toLocaleString('pt-BR');
+                }
               }
             });
           });
         }
       });
-    }
+    });
   }
 
   // Smooth Scrolling for Anchor Links
