@@ -1,14 +1,14 @@
 :root {
-  --primary: #00677d;
-  --primary-hover: #005466;
-  --accent: #00a1c1;
-  --bg-color: #fcfcfc;
-  --surface: #ffffff;
-  --surface-alt: #f1f5f9;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border: rgba(15, 23, 42, 0.08);
-  --border-focus: rgba(0, 103, 125, 0.4);
+  --primary: #00E5FF;
+  --primary-hover: #00B2CC;
+  --accent: #1DE9B6;
+  --bg-color: #050C0C;
+  --surface: #0A1414;
+  --surface-alt: #0F1A1A;
+  --text-main: #FFFFFF;
+  --text-muted: #A1A1AA;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(0, 229, 255, 0.4);
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -52,16 +52,18 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   inset: 0;
   z-index: -1;
+  background-color: var(--bg-color);
   background-image: 
-    linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.03), transparent 80%),
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 64px 64px, 64px 64px;
   pointer-events: none;
 }
 
 /* Navigation - Glassmorphism */
 .nav-glass {
-  background: rgba(252, 252, 252, 0.7);
+  background: rgba(5, 12, 12, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
